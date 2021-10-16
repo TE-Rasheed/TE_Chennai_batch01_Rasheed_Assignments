@@ -1,0 +1,371 @@
+1) LIST ALL THE EMPLOYEES WHOSE COMMISSION IS NULL ?
+SOL:> select *
+    -> from interns
+    -> where Comm is null;
++---------+-----+------------+--------+-----------+------------+---------+--------+---------------------------+-------------+------+
+| name    | id  | dob        | gender | role      | mobile     | salary  | deptid | email                     | blood_group | Comm |
++---------+-----+------------+--------+-----------+------------+---------+--------+---------------------------+-------------+------+
+| Kishore |  30 | 1996-11-08 | M      | Architect | 7006746528 | 10000.5 |    300 | Kishore143@gmail.com      | B+          | NULL |
+| Vivek   |  40 | 1999-03-18 | M      | testing   | 7034566528 | 15000.5 |    400 | VivekChowdary@gmail.com   | A+          | NULL |
+| Rasheed |  60 | 1998-11-18 | M      | Developer | 7005246528 | 25000.5 |    200 | shaikrasheed449@gmail.com | AB+         | NULL |
+| Adhah   |  80 | 1987-10-03 | F      | Teasting  | 7056778393 | 41000.5 |    400 | Adhah@gmail.com           | A+          | NULL |
+| Afeefa  | 100 | 1987-04-15 | F      | dba       | 7058990393 | 34000.5 |    200 | Afeefa@gmail.com          | AB+         | NULL |
++---------+-----+------------+--------+-----------+------------+---------+--------+---------------------------+-------------+------+
+
+
+2) LIST ALL THE EMPLOYEES WHO DON’T HAVE A REPORTING MANAGER ?
+SOL:> select *
+    -> from interns
+    -> where MGR is null;
+Empty set (0.00 sec)
+
+3) LIST ALL THE ARCHITECT IN DEPT 30 ?
+SOL: select *
+    -> from interns
+    -> where role = 'Architect';
++---------+----+------------+--------+-----------+------------+---------+--------+----------------------+-------------+------+-----+
+| name    | id | dob        | gender | role      | mobile     | salary  | deptid | email                | blood_group | Comm | MGR |
++---------+----+------------+--------+-----------+------------+---------+--------+----------------------+-------------+------+-----+
+| Kishore | 30 | 1996-11-08 | M      | Architect | 7006746528 | 10000.5 |    300 | Kishore143@gmail.com | B+          | NULL | 100 |
+| Krithi  | 70 | 1990-02-03 | F      | Architect | 7056784393 | 35000.5 |    300 | Krithi@gmail.com     | O+          |  400 |  80 |
++---------+----+------------+--------+-----------+------------+---------+--------+----------------------+-------------+------+-----+
+
+4) LIST ALL THE ARCHITECT IN ID NUMBER 30 AND HAVING SALARY GREATER THAN 5000 ?
+SOL:> select *
+    -> from interns
+    -> where role = 'Architect' and id=30 and salary > 5000;
++---------+----+------------+--------+-----------+------------+---------+--------+----------------------+-------------+------+-----+
+| name    | id | dob        | gender | role      | mobile     | salary  | deptid | email                | blood_group | Comm | MGR |
++---------+----+------------+--------+-----------+------------+---------+--------+----------------------+-------------+------+-----+
+| Kishore | 30 | 1996-11-08 | M      | Architect | 7006746528 | 10000.5 |    300 | Kishore143@gmail.com | B+          | NULL | 100 |
++---------+----+------------+--------+-----------+------------+---------+--------+----------------------+-------------+------+-----+
+
+5) LIST ALL THE EMPLOYEES WHOSE NAME STARTS WITH ‘S’ OR ‘A’ ?
+SOL:> select *
+    -> from interns
+    -> where  name like 'S%' or name like 'A%';
++--------------+-----+------------+--------+-----------+------------+----------+--------+----------------------+-------------+------+-----+
+| name         | id  | dob        | gender | role      | mobile     | salary   | deptid | email                | blood_group | Comm | MGR |
++--------------+-----+------------+--------+-----------+------------+----------+--------+----------------------+-------------+------+-----+
+| sruthihassan |  20 | 1985-05-12 | F      | developer | 7493679201 | 100000.5 |    200 | shruthi999@gmail.com | B+          |  650 |  60 |
+| Adhah        |  80 | 1987-10-03 | F      | Teasting  | 7056778393 |  41000.5 |    400 | Adhah@gmail.com      | A+          | NULL |  10 |
+| Afrin        |  90 | 1987-06-25 | F      | Developer | 7058978393 |  75000.5 |    100 | Afrin@gmail.com      | B+          | 1050 |  40 |
+| Afeefa       | 100 | 1987-04-15 | F      | dba       | 7058990393 |  34000.5 |    200 | Afeefa@gmail.com     | AB+         | NULL |  20 |
++--------------+-----+------------+--------+-----------+------------+----------+--------+----------------------+-------------+------+-----+
+
+6) LIST ALL THE EMPLOYEES EXCEPT THOSE WHO ARE WORKING IN DEPT 10 & 20 ?
+SOL:> select *
+    -> from interns
+    -> where id <> 10 and id <> 20;
++---------+-----+------------+--------+-----------+------------+---------+--------+---------------------------+-------------+------+-----+
+| name    | id  | dob        | gender | role      | mobile     | salary  | deptid | email                     | blood_group | Comm | MGR |
++---------+-----+------------+--------+-----------+------------+---------+--------+---------------------------+-------------+------+-----+
+| Kishore |  30 | 1996-11-08 | M      | Architect | 7006746528 | 10000.5 |    300 | Kishore143@gmail.com      | B+          | NULL | 100 |
+| Vivek   |  40 | 1999-03-18 | M      | testing   | 7034566528 | 15000.5 |    400 | VivekChowdary@gmail.com   | A+          | NULL |  90 |
+| Naveen  |  50 | 1997-11-15 | M      | dba       | 7355246528 | 55000.5 |    100 | Naveen159@gmail.com       | AB+         |  700 |  20 |
+| Rasheed |  60 | 1998-11-18 | M      | Developer | 7005246528 | 25000.5 |    200 | shaikrasheed449@gmail.com | AB+         | NULL |  30 |
+| Krithi  |  70 | 1990-02-03 | F      | Architect | 7056784393 | 35000.5 |    300 | Krithi@gmail.com          | O+          |  400 |  80 |
+| Adhah   |  80 | 1987-10-03 | F      | Teasting  | 7056778393 | 41000.5 |    400 | Adhah@gmail.com           | A+          | NULL |  10 |
+| Afrin   |  90 | 1987-06-25 | F      | Developer | 7058978393 | 75000.5 |    100 | Afrin@gmail.com           | B+          | 1050 |  40 |
+| Afeefa  | 100 | 1987-04-15 | F      | dba       | 7058990393 | 34000.5 |    200 | Afeefa@gmail.com          | AB+         | NULL |  20 |
++---------+-----+------------+--------+-----------+------------+---------+--------+---------------------------+-------------+------+-----+
+
+7) LIST THE EMPLOYEES WHOSE NAME DOES NOT START WITH ‘S’ ?
+SOL: select *
+    -> from interns
+    -> where name not like 'S%';
++---------+-----+------------+--------+-----------+------------+---------+--------+---------------------------+-------------+------+-----+
+| name    | id  | dob        | gender | role      | mobile     | salary  | deptid | email                     | blood_group | Comm | MGR |
++---------+-----+------------+--------+-----------+------------+---------+--------+---------------------------+-------------+------+-----+
+| Mayur   |  10 | 1994-11-18 | M      | dba       | 7005244728 | 27000.5 |    100 | Mayur123@gmail.com        | A+          |  300 |  50 |
+| Kishore |  30 | 1996-11-08 | M      | Architect | 7006746528 | 10000.5 |    300 | Kishore143@gmail.com      | B+          | NULL | 100 |
+| Vivek   |  40 | 1999-03-18 | M      | testing   | 7034566528 | 15000.5 |    400 | VivekChowdary@gmail.com   | A+          | NULL |  90 |
+| Naveen  |  50 | 1997-11-15 | M      | dba       | 7355246528 | 55000.5 |    100 | Naveen159@gmail.com       | AB+         |  700 |  20 |
+| Rasheed |  60 | 1998-11-18 | M      | Developer | 7005246528 | 25000.5 |    200 | shaikrasheed449@gmail.com | AB+         | NULL |  30 |
+| Krithi  |  70 | 1990-02-03 | F      | Architect | 7056784393 | 35000.5 |    300 | Krithi@gmail.com          | O+          |  400 |  80 |
+| Adhah   |  80 | 1987-10-03 | F      | Teasting  | 7056778393 | 41000.5 |    400 | Adhah@gmail.com           | A+          | NULL |  10 |
+| Afrin   |  90 | 1987-06-25 | F      | Developer | 7058978393 | 75000.5 |    100 | Afrin@gmail.com           | B+          | 1050 |  40 |
+| Afeefa  | 100 | 1987-04-15 | F      | dba       | 7058990393 | 34000.5 |    200 | Afeefa@gmail.com          | AB+         | NULL |  20 |
++---------+-----+------------+--------+-----------+------------+---------+--------+---------------------------+-------------+------+-----+
+
+
+8) LIST ALL THE EMPLOYEES WHO ARE HAVING REPORTING MANAGERS IN DEPT 10 ?
+SOL: select *
+    -> from interns
+    -> where MGR is not null and id=10;
++-------+----+------------+--------+------+------------+---------+--------+--------------------+-------------+------+-----+
+| name  | id | dob        | gender | role | mobile     | salary  | deptid | email              | blood_group | Comm | MGR |
++-------+----+------------+--------+------+------------+---------+--------+--------------------+-------------+------+-----+
+| Mayur | 10 | 1994-11-18 | M      | dba  | 7005244728 | 27000.5 |    100 | Mayur123@gmail.com | A+          |  300 |  50 |
++-------+----+------------+--------+------+------------+---------+--------+--------------------+-------------+------+-----+
+
+9) LIST ALL THE EMPLOYEES WHOSE COMMISSION IS NULL AND WORKING AS CLERK ?
+SOL:> select *
+    -> from interns
+    -> where Comm is null and role='Architect';
++---------+----+------------+--------+-----------+------------+---------+--------+----------------------+-------------+------+-----+
+| name    | id | dob        | gender | role      | mobile     | salary  | deptid | email                | blood_group | Comm | MGR |
++---------+----+------------+--------+-----------+------------+---------+--------+----------------------+-------------+------+-----+
+| Kishore | 30 | 1996-11-08 | M      | Architect | 7006746528 | 10000.5 |    300 | Kishore143@gmail.com | B+          | NULL | 100 |
++---------+----+------------+--------+-----------+------------+---------+--------+----------------------+-------------+------+-----+
+
+10) LIST ALL THE EMPLOYEES WHO DON’T HAVE A REPORTING MANAGER IN DEPTNO 10 OR 30 ?
+SOL:> select *
+    -> from interns
+    -> where MGR is null and id in(10,20);
+Empty set (0.00 sec)
+
+11) LIST ALL THE ARCHITECT IN DEPT 30 WITH SAL MORE THAN 2450 ?
+SOL: select *
+    -> from interns
+    -> where role = 'Architect' and id=30 and salary >2450;
++---------+----+------------+--------+-----------+------------+---------+--------+----------------------+-------------+------+-----+
+| name    | id | dob        | gender | role      | mobile     | salary  | deptid | email                | blood_group | Comm | MGR |
++---------+----+------------+--------+-----------+------------+---------+--------+----------------------+-------------+------+-----+
+| Kishore | 30 | 1996-11-08 | M      | Architect | 7006746528 | 10000.5 |    300 | Kishore143@gmail.com | B+          | NULL | 100 |
++---------+----+------------+--------+-----------+------------+---------+--------+----------------------+-------------+------+-----+
+
+12) LIST ALL THE DEVELOPER IN DEPT NUMBER 20 AND HAVING SALARY GREATER THAN 50000 ? select *
+SOL:>select *
+    -> from interns
+    -> where role='Developer' and id=20 and salary > 50000;
++--------------+----+------------+--------+-----------+------------+----------+--------+----------------------+-------------+------+-----+
+| name         | id | dob        | gender | role      | mobile     | salary   | deptid | email                | blood_group | Comm | MGR |
++--------------+----+------------+--------+-----------+------------+----------+--------+----------------------+-------------+------+-----+
+| sruthihassan | 20 | 1985-05-12 | F      | developer | 7493679201 | 100000.5 |    200 | shruthi999@gmail.com | B+          |  650 |  60 |
++--------------+----+------------+--------+-----------+------------+----------+--------+----------------------+-------------+------+-----+
+
+13) LIST ALL THE EMPLOYEES WHOSE NAME STARTS WITH ‘M’ OR ‘J’ ?
+SOL:> select *
+    -> from interns
+    -> where name like '%M' or name like '%J';
+Empty set (0.00 sec)
+
+14) LIST ALL THE EMPLOYEES WITH ANNUAL SALARY EXCEPT THOSE WHO ARE WORKING IN DEPT 30  ?
+SOL: select interns.*,salary*12
+    -> from interns
+    -> where id <> 30;
++--------------+-----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+-----------+
+| name         | id  | dob        | gender | role      | mobile     | salary   | deptid | email                     | blood_group | Comm | MGR | salary*12 |
++--------------+-----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+-----------+
+| Mayur        |  10 | 1994-11-18 | M      | dba       | 7005244728 |  27000.5 |    100 | Mayur123@gmail.com        | A+          |  300 |  50 |    324006 |
+| sruthihassan |  20 | 1985-05-12 | F      | developer | 7493679201 | 100000.5 |    200 | shruthi999@gmail.com      | B+          |  650 |  60 |   1200006 |
+| Vivek        |  40 | 1999-03-18 | M      | testing   | 7034566528 |  15000.5 |    400 | VivekChowdary@gmail.com   | A+          | NULL |  90 |    180006 |
+| Naveen       |  50 | 1997-11-15 | M      | dba       | 7355246528 |  55000.5 |    100 | Naveen159@gmail.com       | AB+         |  700 |  20 |    660006 |
+| Rasheed      |  60 | 1998-11-18 | M      | Developer | 7005246528 |  25000.5 |    200 | shaikrasheed449@gmail.com | AB+         | NULL |  30 |    300006 |
+| Krithi       |  70 | 1990-02-03 | F      | Architect | 7056784393 |  35000.5 |    300 | Krithi@gmail.com          | O+          |  400 |  80 |    420006 |
+| Adhah        |  80 | 1987-10-03 | F      | Teasting  | 7056778393 |  41000.5 |    400 | Adhah@gmail.com           | A+          | NULL |  10 |    492006 |
+| Afrin        |  90 | 1987-06-25 | F      | Developer | 7058978393 |  75000.5 |    100 | Afrin@gmail.com           | B+          | 1050 |  40 |    900006 |
+| Afeefa       | 100 | 1987-04-15 | F      | dba       | 7058990393 |  34000.5 |    200 | Afeefa@gmail.com          | AB+         | NULL |  20 |    408006 |
++--------------+-----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+-----------+
+
+15) LIST THE EMPLOYEES WHOSE NAME DOES NOT END WITH ‘ES’ OR ‘R’ ?
+SOL: select *
+    -> from interns
+    -> where name not like '%ES' or name not like '%R';
++--------------+-----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+
+| name         | id  | dob        | gender | role      | mobile     | salary   | deptid | email                     | blood_group | Comm | MGR |
++--------------+-----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+
+| Mayur        |  10 | 1994-11-18 | M      | dba       | 7005244728 |  27000.5 |    100 | Mayur123@gmail.com        | A+          |  300 |  50 |
+| sruthihassan |  20 | 1985-05-12 | F      | developer | 7493679201 | 100000.5 |    200 | shruthi999@gmail.com      | B+          |  650 |  60 |
+| Kishore      |  30 | 1996-11-08 | M      | Architect | 7006746528 |  10000.5 |    300 | Kishore143@gmail.com      | B+          | NULL | 100 |
+| Vivek        |  40 | 1999-03-18 | M      | testing   | 7034566528 |  15000.5 |    400 | VivekChowdary@gmail.com   | A+          | NULL |  90 |
+| Naveen       |  50 | 1997-11-15 | M      | dba       | 7355246528 |  55000.5 |    100 | Naveen159@gmail.com       | AB+         |  700 |  20 |
+| Rasheed      |  60 | 1998-11-18 | M      | Developer | 7005246528 |  25000.5 |    200 | shaikrasheed449@gmail.com | AB+         | NULL |  30 |
+| Krithi       |  70 | 1990-02-03 | F      | Architect | 7056784393 |  35000.5 |    300 | Krithi@gmail.com          | O+          |  400 |  80 |
+| Adhah        |  80 | 1987-10-03 | F      | Teasting  | 7056778393 |  41000.5 |    400 | Adhah@gmail.com           | A+          | NULL |  10 |
+| Afrin        |  90 | 1987-06-25 | F      | Developer | 7058978393 |  75000.5 |    100 | Afrin@gmail.com           | B+          | 1050 |  40 |
+| Afeefa       | 100 | 1987-04-15 | F      | dba       | 7058990393 |  34000.5 |    200 | Afeefa@gmail.com          | AB+         | NULL |  20 |
++--------------+-----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+
+
+
+16) LIST ALL THE EMPLOYEES WHO ARE HAVING REPORTING MANAGERS IN DEPT 10 ALONG WITH 10% HIKE IN SALARY ?
+SOL:select interns.*,salary+(salary*10/100)
+    -> from interns
+    -> where MGR is not null and id = 10 ;
++-------+----+------------+--------+------+------------+---------+--------+--------------------+-------------+------+-----+------------------------+
+| name  | id | dob        | gender | role | mobile     | salary  | deptid | email              | blood_group | Comm | MGR | salary+(salary*10/100) |
++-------+----+------------+--------+------+------------+---------+--------+--------------------+-------------+------+-----+------------------------+
+| Mayur | 10 | 1994-11-18 | M      | dba  | 7005244728 | 27000.5 |    100 | Mayur123@gmail.com | A+          |  300 |  50 |               29700.55 |
++-------+----+------------+--------+------+------------+---------+--------+--------------------+-------------+------+-----+------------------------+
+
+17) DISPLAY ALL THE EMPLOYEE WHO ARE ‘ARCHITECT’S HAVING ‘C’ AS THE LAST BUT ONE CHARACTER IN ENAME BUT SALARY HAVING EXACTLY 4 CHARACTER ?
+SOL:l> select *
+    -> from interns
+    -> where name like '%C_' and salary like '5_';
+Empty set (0.00 sec)
+
+18) DISPLAY ALL THE EMPLOYEE WHO ARE born AFTER YEAR 80 ?
+SOL: select *
+    -> from interns
+    -> where dob > '01-01-1980';
++--------------+-----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+
+| name         | id  | dob        | gender | role      | mobile     | salary   | deptid | email                     | blood_group | Comm | MGR |
++--------------+-----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+
+| Mayur        |  10 | 1994-11-18 | M      | dba       | 7005244728 |  27000.5 |    100 | Mayur123@gmail.com        | A+          |  300 |  50 |
+| sruthihassan |  20 | 1985-05-12 | F      | developer | 7493679201 | 100000.5 |    200 | shruthi999@gmail.com      | B+          |  650 |  60 |
+| Kishore      |  30 | 1996-11-08 | M      | Architect | 7006746528 |  10000.5 |    300 | Kishore143@gmail.com      | B+          | NULL | 100 |
+| Vivek        |  40 | 1999-03-18 | M      | testing   | 7034566528 |  15000.5 |    400 | VivekChowdary@gmail.com   | A+          | NULL |  90 |
+| Naveen       |  50 | 1997-11-15 | M      | dba       | 7355246528 |  55000.5 |    100 | Naveen159@gmail.com       | AB+         |  700 |  20 |
+| Rasheed      |  60 | 1998-11-18 | M      | Developer | 7005246528 |  25000.5 |    200 | shaikrasheed449@gmail.com | AB+         | NULL |  30 |
+| Krithi       |  70 | 1990-02-03 | F      | Architect | 7056784393 |  35000.5 |    300 | Krithi@gmail.com          | O+          |  400 |  80 |
+| Adhah        |  80 | 1987-10-03 | F      | Teasting  | 7056778393 |  41000.5 |    400 | Adhah@gmail.com           | A+          | NULL |  10 |
+| Afrin        |  90 | 1987-06-25 | F      | Developer | 7058978393 |  75000.5 |    100 | Afrin@gmail.com           | B+          | 1050 |  40 |
+| Afeefa       | 100 | 1987-04-15 | F      | dba       | 7058990393 |  34000.5 |    200 | Afeefa@gmail.com          | AB+         | NULL |  20 |
++--------------+-----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+
+
+19) DISPLAY ALL THE EMPLOYEE WHO ARE born IN FEB ?
+SOL:select *
+    -> from interns
+    -> where dob  like '%02%';
++--------+----+------------+--------+-----------+------------+---------+--------+------------------+-------------+------+-----+
+| name   | id | dob        | gender | role      | mobile     | salary  | deptid | email            | blood_group | Comm | MGR |
++--------+----+------------+--------+-----------+------------+---------+--------+------------------+-------------+------+-----+
+| Krithi | 70 | 1990-02-03 | F      | Architect | 7056784393 | 35000.5 |    300 | Krithi@gmail.com | O+          |  400 |  80 |
++--------+----+------------+--------+-----------+------------+---------+--------+------------------+-------------+------+-----+
+
+20) LIST THE EMPLOYEES WHO ARE NOT WORKING AS ARCHITECT AND DEVELOPER IN DEPT 200 AND 300 WITH A SALARY IN THE RANGE OF 10000 TO 100000 ?
+SOL:> select *
+    -> from interns
+    -> where role not in ('Architect','developer') and deptid not in(200,300) and salary between 10000 and 100000;
++--------+----+------------+--------+----------+------------+---------+--------+-------------------------+-------------+------+-----+
+| name   | id | dob        | gender | role     | mobile     | salary  | deptid | email                   | blood_group | Comm | MGR |
++--------+----+------------+--------+----------+------------+---------+--------+-------------------------+-------------+------+-----+
+| Mayur  | 10 | 1994-11-18 | M      | dba      | 7005244728 | 27000.5 |    100 | Mayur123@gmail.com      | A+          |  300 |  50 |
+| Vivek  | 40 | 1999-03-18 | M      | testing  | 7034566528 | 15000.5 |    400 | VivekChowdary@gmail.com | A+          | NULL |  90 |
+| Naveen | 50 | 1997-11-15 | M      | dba      | 7355246528 | 55000.5 |    100 | Naveen159@gmail.com     | AB+         |  700 |  20 |
+| Adhah  | 80 | 1987-10-03 | F      | Teasting | 7056778393 | 41000.5 |    400 | Adhah@gmail.com         | A+          | NULL |  10 |
++--------+----+------------+--------+----------+------------+---------+--------+-------------------------+-------------+------+-----+
+
+21) LIST THE EMPLOYEES WHOSE SALARY NOT IN THE RANGE OF 11000 TO 20000 AND WORKING IN DEPT 100,200 OR 300 EXCEPT ALL DBA ?
+SOL: select *
+    -> from interns
+    -> where role <>'Dba' and deptid not in(200,300,100) and salary between 11000 and 20000;
++-------+----+------------+--------+---------+------------+---------+--------+-------------------------+-------------+------+-----+
+| name  | id | dob        | gender | role    | mobile     | salary  | deptid | email                   | blood_group | Comm | MGR |
++-------+----+------------+--------+---------+------------+---------+--------+-------------------------+-------------+------+-----+
+| Vivek | 40 | 1999-03-18 | M      | testing | 7034566528 | 15000.5 |    400 | VivekChowdary@gmail.com | A+          | NULL |  90 |
++-------+----+------------+--------+---------+------------+---------+--------+-------------------------+-------------+------+-----+
+
+22) LIST THE DEPARTMENT NAMES WHICH ARE HAVING LETTER ‘O’ IN THEIR LOCATIONS AS WELL AS THEIR DEPARTMENT NAMES ?
+SOL: select dname,location
+    -> from department
+    -> where location like '%o%';
++-----------+------------+
+| dname     | location   |
++-----------+------------+
+| Developer | Newyork    |
+| Sales     | LossAngles |
+| Developer | Chicago    |
++-----------+------------+
+
+23) DISPLAY ALL THE EMPLOYEES WHOSE JOB HAS STRING ‘DEV’ IN IT ?
+SOL:> select *
+    -> from interns
+    -> where role like '%DEV%';
++--------------+----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+
+| name         | id | dob        | gender | role      | mobile     | salary   | deptid | email                     | blood_group | Comm | MGR |
++--------------+----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+
+| sruthihassan | 20 | 1985-05-12 | F      | developer | 7493679201 | 100000.5 |    200 | shruthi999@gmail.com      | B+          |  650 |  60 |
+| Rasheed      | 60 | 1998-11-18 | M      | Developer | 7005246528 |  25000.5 |    200 | shaikrasheed449@gmail.com | AB+         | NULL |  30 |
+| Afrin        | 90 | 1987-06-25 | F      | Developer | 7058978393 |  75000.5 |    100 | Afrin@gmail.com           | B+          | 1050 |  40 |
++--------------+----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+
+
+24)LIST THE EMPLOYEES WHO ARE BORN AFTER 90 AND BEFORE 98 ?
+SOL:> select *
+    -> from interns
+    -> where dob>'01-01-1990' and dob <  '31-12-1998';
++--------------+-----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+
+| name         | id  | dob        | gender | role      | mobile     | salary   | deptid | email                     | blood_group | Comm | MGR |
++--------------+-----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+
+| Mayur        |  10 | 1994-11-18 | M      | dba       | 7005244728 |  27000.5 |    100 | Mayur123@gmail.com        | A+          |  300 |  50 |
+| sruthihassan |  20 | 1985-05-12 | F      | developer | 7493679201 | 100000.5 |    200 | shruthi999@gmail.com      | B+          |  650 |  60 |
+| Kishore      |  30 | 1996-11-08 | M      | Architect | 7006746528 |  10000.5 |    300 | Kishore143@gmail.com      | B+          | NULL | 100 |
+| Vivek        |  40 | 1999-03-18 | M      | testing   | 7034566528 |  15000.5 |    400 | VivekChowdary@gmail.com   | A+          | NULL |  90 |
+| Naveen       |  50 | 1997-11-15 | M      | dba       | 7355246528 |  55000.5 |    100 | Naveen159@gmail.com       | AB+         |  700 |  20 |
+| Rasheed      |  60 | 1998-11-18 | M      | Developer | 7005246528 |  25000.5 |    200 | shaikrasheed449@gmail.com | AB+         | NULL |  30 |
+| Krithi       |  70 | 1990-02-03 | F      | Architect | 7056784393 |  35000.5 |    300 | Krithi@gmail.com          | O+          |  400 |  80 |
+| Adhah        |  80 | 1987-10-03 | F      | Teasting  | 7056778393 |  41000.5 |    400 | Adhah@gmail.com           | A+          | NULL |  10 |
+| Afrin        |  90 | 1987-06-25 | F      | Developer | 7058978393 |  75000.5 |    100 | Afrin@gmail.com           | B+          | 1050 |  40 |
+| Afeefa       | 100 | 1987-04-15 | F      | dba       | 7058990393 |  34000.5 |    200 | Afeefa@gmail.com          | AB+         | NULL |  20 |
++--------------+-----+------------+--------+-----------+------------+----------+--------+---------------------------+-------------+------+-----+
+
+25)WAQTD ALL THE DETAILS OF EMPLOYEES not BORN IN NOVEMBER AND JUNE ?
+SOL: select *
+    -> from interns
+    -> where dob not like '%11%' and dob not like '%06%';
++--------------+-----+------------+--------+-----------+------------+----------+--------+-------------------------+-------------+------+-----+
+| name         | id  | dob        | gender | role      | mobile     | salary   | deptid | email                   | blood_group | Comm | MGR |
++--------------+-----+------------+--------+-----------+------------+----------+--------+-------------------------+-------------+------+-----+
+| sruthihassan |  20 | 1985-05-12 | F      | developer | 7493679201 | 100000.5 |    200 | shruthi999@gmail.com    | B+          |  650 |  60 |
+| Vivek        |  40 | 1999-03-18 | M      | testing   | 7034566528 |  15000.5 |    400 | VivekChowdary@gmail.com | A+          | NULL |  90 |
+| Krithi       |  70 | 1990-02-03 | F      | Architect | 7056784393 |  35000.5 |    300 | Krithi@gmail.com        | O+          |  400 |  80 |
+| Adhah        |  80 | 1987-10-03 | F      | Teasting  | 7056778393 |  41000.5 |    400 | Adhah@gmail.com         | A+          | NULL |  10 |
+| Afeefa       | 100 | 1987-04-15 | F      | dba       | 7058990393 |  34000.5 |    200 | Afeefa@gmail.com        | AB+         | NULL |  20 |
++--------------+-----+------------+--------+-----------+------------+----------+--------+-------------------------+-------------+------+-----+
+
+26)LIST ALL THE EMPLOYEE NAMES AND COMISSION FOR THOSE EMPLOYEES WHO EARN COMISSION LESS THAN THEIR SALARY ?
+SOL: select name,Comm
+    -> from interns
+    -> where Comm<salary;
++--------------+------+
+| name         | Comm |
++--------------+------+
+| Mayur        |  300 |
+| sruthihassan |  650 |
+| Naveen       |  700 |
+| Krithi       |  400 |
+| Afrin        | 1050 |
++--------------+------+
+
+27)WAQTD NAME AND DESIGNATION FOR ALL THE EMPLOYEES HAVING REPORTING MANAGERS AND ALSO THRIE NAMES STARTING WITH ‘S’ ?
+SOL:> select name,role
+    -> from interns
+    -> where MGR is not null and name like 's%';
++--------------+-----------+
+| name         | role      |
++--------------+-----------+
+| sruthihassan | developer |
++--------------+-----------+
+1 row in set (0.00 sec)
+
+28)WAQTD NAME AND SALARY OF ALL THE EMPLOYEES IF THEIR ANNUAL SALARY NOT ENDS WITH ‘0’ ?
+SOL: select name,salary
+    -> from interns
+    -> where salary*12 not like '%0';
++--------------+----------+
+| name         | salary   |
++--------------+----------+
+| Mayur        |  27000.5 |
+| sruthihassan | 100000.5 |
+| Kishore      |  10000.5 |
+| Vivek        |  15000.5 |
+| Naveen       |  55000.5 |
+| Rasheed      |  25000.5 |
+| Krithi       |  35000.5 |
+| Adhah        |  41000.5 |
+| Afrin        |  75000.5 |
+| Afeefa       |  34000.5 |
++--------------+----------+
+29)WAQTD NAME OF THE EMPLOYEE HAVING ATLEAST 2E’s IN HIS NAME ?
+SOL:> select name
+    -> from interns
+    -> where name like '%e%e%';
++---------+
+| name    |
++---------+
+| Naveen  |
+| Rasheed |
+| Afeefa  |
++---------+
+30)WAQTD NAME OF THE EMPLOYEES WHOS NAME STARTS WITH A ‘VOWEL ?
+SOL:l> select name
+    -> from interns
+    -> where name like 'A%';
++--------+
+| name   |
++--------+
+| Adhah  |
+| Afrin  |
+| Afeefa |
++--------+
